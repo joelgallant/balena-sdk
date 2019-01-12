@@ -15,15 +15,10 @@ omit = require('lodash/omit')
 throttle = require('lodash/throttle')
 memoizee = require('memoizee')
 moment = require('moment')
+{ globalEnv } = require('./global-env')
 
 # Use window (web)/self (web worker)/global (node) as appropriate
-exports.globalEnv = if typeof window != 'undefined'
-	window
-else if typeof self != 'undefined'
-	self
-else if typeof global != 'undefined'
-	global
-else null # If we can't guarantee global state, don't fake it: fail instead.
+exports.globalEnv = globalEnv
 
 
 exports.deviceTypes = require('./device-types')
